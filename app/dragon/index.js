@@ -1,12 +1,13 @@
-const TRAITS = require('../data/traits.json');
+const TRAITS = require('../../data/traits.json');
 
 const DEFAULT_PROPERTIES = {
   nickname: 'unnamed',
+  generationId: undefined,
   //// date is created when new Date() is created.
   //birthday: new Date()
   //// date is created when actual dragon is created/used 
   //// when there is setTimeout, the data will be the dragon is appiered in console.log
-  get birthday() {
+  get birthdate() {
     return new Date()
   },
   get randomTraits() {
@@ -27,10 +28,11 @@ const DEFAULT_PROPERTIES = {
 class Dragon {
   // empty {} accept if instance was created with empty value ex. cosnt abc = new Dragon();
   // By wrapping properoties by {}, client can assigne as object
-  constructor({ birthday, nickname, traits } = {}){
-    this.birthday = birthday || DEFAULT_PROPERTIES.birthday;
+  constructor({ birthdate, nickname, traits, generationId } = {}){
+    this.birthdate = birthdate || DEFAULT_PROPERTIES.birthdate;
     this.nickname = nickname || DEFAULT_PROPERTIES.nickname;
     this.traits = traits || DEFAULT_PROPERTIES.randomTraits;
+    this.generationId = generationId || DEFAULT_PROPERTIES.generationId;
   }
 }
 
