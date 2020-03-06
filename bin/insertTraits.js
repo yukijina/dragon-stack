@@ -11,7 +11,7 @@ TRAITS.forEach(TRAIT => {
       [traitType, traitValue],
       (err, res) => {
         if(err) console.log(err)
-
+       
         const traitId = res.rows[0].id;
         console.log(`Inserted trait - id: ${traitId}`);
       }

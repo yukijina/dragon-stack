@@ -28,8 +28,8 @@ const DEFAULT_PROPERTIES = {
 class Dragon {
   // empty {} accept if instance was created with empty value ex. cosnt abc = new Dragon();
   // By wrapping properoties by {}, client can assigne as object
-  constructor({ birthdate, nickname, traits, generationId } = {}){
-    this.birthdate = birthdate || DEFAULT_PROPERTIES.birthdate;
+  constructor({ birthda, nickname, traits, generationId } = {}){
+    this.birthda = birthda || DEFAULT_PROPERTIES.birthda;
     this.nickname = nickname || DEFAULT_PROPERTIES.nickname;
     this.traits = traits || DEFAULT_PROPERTIES.randomTraits;
     this.generationId = generationId || DEFAULT_PROPERTIES.generationId;
