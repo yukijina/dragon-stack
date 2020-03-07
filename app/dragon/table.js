@@ -16,7 +16,7 @@ class DragonTable {
 
           const dragonId = res.rows[0].id;
 
-          Promis.all(dragon.traits.map(({ traitType, traitValue }) => {
+          Promise.all(dragon.traits.map(({ traitType, traitValue }) => {
             // this returns promise
             return DragonTraitTable.storeDragonTrait({
               dragonId, traitType, traitValue
