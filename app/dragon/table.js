@@ -47,8 +47,8 @@ class DragonTable {
 }
 
 //// For test => in the terminal, node app/dragon/table.js
-DragonTable.getDragon({dragonId: 13})
-.then(dragon => console.log(dragon))
-.catch(error => console.log('error: ', error));
+// DragonTable.getDragon({dragonId: 13})
+// .then(dragon => console.log(dragon))
+// .catch(error => console.log('error: ', error));
 
 module.exports = DragonTable;
