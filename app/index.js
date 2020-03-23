@@ -1,9 +1,11 @@
 const express = require('express');
 //// middleware
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const GenerationEngine = require('./generation/engine');
 const dragonRouter = require('./api/dragon');
 const generationRouter = require('./api/generation');
+const accountRouter = require('./api/account');
 
 const app = express();
 const engine = new GenerationEngine();
@@ -12,9 +14,12 @@ app.locals.engine = engine;
 
 //// Cores - same origin policy
 app.use(cors({ origin: 'http://localhost:1234'}));
+/// bodyParser json function - it allows to write express post request
+app.use(bodyParser.json());
 
 
 // create routes
+app.use('/account', accountRouter);
 app.use('/dragon', dragonRouter);
 app.use('/generation', generationRouter);
 
