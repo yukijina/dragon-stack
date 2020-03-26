@@ -2,7 +2,7 @@ const { Router } = require('express');
 const AccountTable = require('../account/table.js');
 // we pass username and password hash - hash function and pass username and password to the argument
 const { hash } = require('../account/helper');  
-const Session = require('../account/session');
+const { setSession } = require('./helper');
 
 const router = new Router();
 
@@ -24,17 +24,8 @@ router.post('/signup', (req, res, next) => {
     }
   })
   .then(() => {
-    const session = new Session({ username });
-    const sessionString = session.toString();
-
-    res.cookie('sessionString!: ', sessionString, {
-      // current date + 3600000 secs. Cookie expier then
-      expire: Date.now() + 3600000,
-      // it makes secure browser cookie. JS can't access to httpOnly cookie
-      httpOnly: true,
-      // only send secure cookie . use with https, not http
-      // secure: true
-    });
+    //api/helpers
+    setSession({ username, res })
     res.json({ message: 'success!' })
   })
   .catch(error => next(error))
