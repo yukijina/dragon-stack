@@ -3,7 +3,7 @@ const AccountTable = require('../account/table');
 const { hash } = require('../account/helper');
 
 const setSession = ({username, res }) => {
-  return new Promise((resolve, reject => {
+  return new Promise((resolve, reject) => {
     const session = new Session({ username });
     const sessionString = session.toString();
 
@@ -23,7 +23,7 @@ const setSession = ({username, res }) => {
       resolve({ message: 'session created'})
     })
     .catch(error => reject(error));
-  }))
+  })
 }
 
 module.exports = { setSession} ;
