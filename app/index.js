@@ -2,6 +2,8 @@ const express = require('express');
 //// middleware
 const cors = require('cors');
 const bodyParser = require('body-parser');
+// Cookie parser is middleware
+const cookieParser = require('cookie-parser');
 const GenerationEngine = require('./generation/engine');
 const dragonRouter = require('./api/dragon');
 const generationRouter = require('./api/generation');
@@ -16,6 +18,7 @@ app.locals.engine = engine;
 app.use(cors({ origin: 'http://localhost:1234'}));
 /// bodyParser json function - it allows to write express post request
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 
 // create routes
