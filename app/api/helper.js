@@ -5,14 +5,15 @@ const { hash } = require('../account/helper');
 const setSession = ({username, res, sessionId }) => {
   return new Promise((resolve, reject) => {
     let session, sessionString;
-
+    console.log('name and id!', username, sessionId)
     if (sessionId) {
-      sessionString = Session.sessionString({ username, id: sessionId })
+      sessionString = Session.sessionString({ username, sessionId })
       setSessionCookie({ sessionString, res });
+      console.log('s.string!:', sessionString)
       resolve({ message: 'session restored' })
     } else {
-      const session = new Session({ username });
-      const sessionString = session.toString();
+      session = new Session({ username });
+      sessionString = session.toString();
 
       AccountTable.updateSessionId({ 
         sessionId: session.id, 
@@ -28,7 +29,7 @@ const setSession = ({username, res, sessionId }) => {
 }
 
 const setSessionCookie = ({ sessionString, res }) => {
-  res.cookie('sessionString!: ', sessionString, {
+  res.cookie('sessionString!!', sessionString, {
     // current date + 3600000 secs. Cookie expier then
     expire: Date.now() + 3600000,
     // it makes secure browser cookie. JS can't access to httpOnly cookie

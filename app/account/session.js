@@ -37,9 +37,9 @@ class Session {
   }
 
   static sessionString({ username, id }) {
-    const accountData = Session.accountData({username, id});
+    const accountData = Session.accountData({ username, id });
 
-    return `${accountData}|${hash(accountData)}`;
+    return `${accountData}${SEPARATOR}${hash(accountData)}`;
   }
 }
 

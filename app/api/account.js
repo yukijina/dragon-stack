@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const AccountTable = require('../account/table.js');
+const AccountTable = require('../account/table');
+const Session =require('../account/session');
 // we pass username and password hash - hash function and pass username and password to the argument
 const { hash } = require('../account/helper');  
 const { setSession } = require('./helper');
@@ -48,6 +49,21 @@ router.post('/login', (req, res,next) => {
   })
   .then(({ message }) => res.json({ message }))
   .catch(error => next(error));
+});
+
+router.get('/logout', (res, req, next) => {
+  //distructure - save username to the variable from Session.parse
+  const { username } = Session.parse(req.cookies.sessionString);
+
+  AccountTable.updateSessionId({
+    sessionId: null,
+    usernameHash: hash(username)
+  })
+  .then(() => {
+    res.clearCookie('sessionString');
+    res.json({ message: 'Successful logout '})
+  })
+  .catch(error => next(error))
 })
 
 module.exports = router;
