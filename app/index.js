@@ -15,7 +15,7 @@ const engine = new GenerationEngine();
 app.locals.engine = engine;
 
 //// Cores - same origin policy
-app.use(cors({ origin: 'http://localhost:1234'}));
+app.use(cors({ origin: 'http://localhost:1234', credentials: true }));
 /// bodyParser json function - it allows to write express post request
 app.use(bodyParser.json());
 app.use(cookieParser());
