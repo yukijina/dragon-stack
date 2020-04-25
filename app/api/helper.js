@@ -2,14 +2,14 @@ const Session = require('../account/session');
 const AccountTable = require('../account/table');
 const { hash } = require('../account/helper');
 
-const setSession = ({username, res, sessionId }) => {
+const setSession = ({ username, res, sessionId }) => {
   return new Promise((resolve, reject) => {
     let session, sessionString;
     console.log('name and id!', username, sessionId)
     if (sessionId) {
-      sessionString = Session.sessionString({ username, sessionId })
+      sessionString = Session.sessionString({ username, id: sessionId })
       setSessionCookie({ sessionString, res });
-      console.log('s.string!:', sessionString)
+      //console.log('s.string!:', sessionString)
       resolve({ message: 'session restored' })
     } else {
       session = new Session({ username });

@@ -29,10 +29,8 @@ app.use('/generation', generationRouter);
 // app.use allows us to tale callback and access the handler - Express middleware
 // next - go to next express middleware
 app.use((err, req, res, next) => {
- /// or const statusCode = err.statuCode || 500;
- // res.status(statusCode).json({
-  res.status(500).json({
-    status: 500,
+  const statusCode = err.statuCode || 500;
+  res.status(statusCode).json({
     type: 'error',
     message: err.message
   })
