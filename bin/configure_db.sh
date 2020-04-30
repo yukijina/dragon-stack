@@ -9,6 +9,7 @@ psql -U node_user dragondb < ./bin/sql/generation.sql
 psql -U node_user dragondb < ./bin/sql/dragon.sql
 psql -U node_user dragondb < ./bin/sql/trait.sql
 psql -U node_user dragondb < ./bin/sql/dragonTrait.sql
+psql -U node_user dragondb < ./bin/sql/accountDragon.sql
 
 node ./bin/insertTraits.js
 
