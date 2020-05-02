@@ -39,4 +39,23 @@ const setSessionCookie = ({ sessionString, res }) => {
   });
 }
 
-module.exports = { setSession} ;
+// this get back to data as well as authenticate
+const authenticatedAccount = ({ sessionString }) => {
+  return new Promise((resolve, reject) => {
+    if (!sessionString || Session.verify(sessionString)) {
+      const error = new Error('Invalid session');
+      error.statusCode = 400;
+      return reject(error);
+    } else {
+      const { username, id } = Session.parse(sessionString);
+      AccountTable.getAccount({ usernameHash: hash(username)})
+      .then(({ account }) => {
+        const authenticated = account.sessionId === id;
+        resolve({ account, authenticated })
+      })
+      .catch(error => reject(error));
+    }
+  })
+}
+
+module.exports = { setSession, authenticatedAccount } ;
