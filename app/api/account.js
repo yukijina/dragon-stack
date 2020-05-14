@@ -69,10 +69,8 @@ router.get('/logout', (res, req, next) => {
 })
 
 router.get('/authenticated', (req, res, next) => {
-  const { sessionString } = req.cookies;
-
-  authenticatedAccount({ sessionString })
-  .then(({ authenticated }) => res.json({ authenticatedAccount }))
+  authenticatedAccount({ sessionString: req.cookies.sessionString })
+  .then(({ authenticated }) => res.json({ authenticated }))
   .catch(error => next(error))
 })
 
@@ -84,12 +82,12 @@ router.get('/dragons', (req, res, next) => {
     })
   })
   .then(({ accountDragons }) => {
-    return PermissionRequestedEvent.call(
+    return Promise.all(
       accountDragons.map(accountDragon => {
-        getDragonWithTraits({ dragonId: accountDragon.dragonId })
+        return getDragonWithTraits({ dragonId: accountDragon.dragonId })
       })
     )
-    .then((dragons) => {
+    .then(dragons => {
       res.json({ dragons })
     })
   })
