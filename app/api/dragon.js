@@ -25,4 +25,12 @@ router.get('/new', (req, res, next) => {
    .catch(err => next(err));   // this err trigger index.js app.use handler (line 17) 
 });
 
+router.put('/update', (req, res, next) => {
+  const { dragonId ,nickname } = req.body;
+
+  DragonTable.updateDragon({ dragonId, nickname })
+  .then(() => res.json({message: 'successfully updated dragon' }))
+  .cath(error => next(error));
+})
+
 module.exports = router;
