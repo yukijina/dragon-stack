@@ -36,7 +36,6 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res,next) => {
   const {username, password } = req.body;
-
   AccountTable.getAccount({ usernameHash: hash(username) })
   .then(({ account }) => {
     if (account && account.passwordHash === hash(password)) {
