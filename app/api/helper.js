@@ -48,9 +48,11 @@ const authenticatedAccount = ({ sessionString }) => {
       return reject(error);
     } else {
       const { username, id } = Session.parse(sessionString);
+
       AccountTable.getAccount({ usernameHash: hash(username)})
       .then(({ account }) => {
         const authenticated = account.sessionId === id;
+        
         resolve({ account, authenticated, username })
       })
       .catch(error => reject(error));

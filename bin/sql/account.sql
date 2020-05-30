@@ -2,7 +2,8 @@ CREATE TABLE account(
   id             SERIAL PRIMARY KEY,
   "usernameHash" CHARACTER(64),
   "passwordHash" CHARACTER(64),
-  "sessionId"    CHARACTER(36)
+  "sessionId"    CHARACTER(36),
+  balance        INTEGER NOT NULL
 );
 
 -- secure password safely. converd plain text password to hased password - use camelcase so need double quote " "
