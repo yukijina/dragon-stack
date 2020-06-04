@@ -4,6 +4,8 @@ const DEFAULT_PROPERTIES = {
   dragonId: undefined,
   nickname: 'unnamed',
   generationId: undefined,
+  isPublic: false,
+  setValue: 0,
   //// date is created when new Date() is created.
   //birthdate: new Date()
   //// date is created when actual dragon is created/used 
@@ -29,12 +31,14 @@ const DEFAULT_PROPERTIES = {
 class Dragon {
   // empty {} accept if instance was created with empty value ex. cosnt abc = new Dragon();
   // By wrapping properoties by {}, client can assigne as object
-  constructor({ dragonId, birthdate, nickname, traits, generationId } = {}){
+  constructor({ dragonId, birthdate, nickname, traits, generationId, isPublic, setValue } = {}){
     this.dragonId = dragonId || DEFAULT_PROPERTIES.dragonId;
     this.birthdate = birthdate || DEFAULT_PROPERTIES.birthdate;
     this.nickname = nickname || DEFAULT_PROPERTIES.nickname;
     this.traits = traits || DEFAULT_PROPERTIES.randomTraits;
     this.generationId = generationId || DEFAULT_PROPERTIES.generationId;
+    this.isPublic = isPublic || DEFAULT_PROPERTIES.isPublic;
+    this.setValue = setValue || DEFAULT_PROPERTIES.setValue;
   }
 }
 

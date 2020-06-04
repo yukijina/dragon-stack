@@ -3,14 +3,14 @@ const DragonTraitTable = require('../dragonTrait/table');
 
 class DragonTable {
   static storeDragon(dragon) {
-    const { birthdate, nickname, generationId } = dragon;
+    const { birthdate, nickname, generationId, isPublic, setValue } = dragon;
 
     return new Promise((resolve, reject) => {
       pool.query(
         // () shema, in order to keep camel case, generationId is wrapped by "". Otherwise SQL consiner it to lowecase
         // return dragon id
         // [] all the values that you want to insert in sql
-        'INSERT INTO dragon(birthdate, nickname, "generationId") VALUES($1, $2, $3) RETURNING id', [birthdate, nickname, generationId],
+        'INSERT INTO dragon(birthdate, nickname, "generationId", "isPublic", "setValue") VALUES($1, $2, $3, $4, $5) RETURNING id', [birthdate, nickname, generationId, isPublic, setValue],
         (err, res) => {
           if (err) return reject(err);
 
@@ -32,7 +32,7 @@ class DragonTable {
   static getDragon({ dragonId }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT birthdate, nickname, "generationId" FROM dragon WHERE dragon.id = $1',
+        'SELECT birthdate, nickname, "generationId", "isPublic", "setValue" FROM dragon WHERE dragon.id = $1',
         [dragonId],
         (error, response) => {
           if (error) return reject(error);
@@ -44,11 +44,11 @@ class DragonTable {
       )
     })
   }
-  static updateDragon({ dragonId, nickname}) {
+  static updateDragon({ dragonId, nickname, isPublic, setValue}) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'UPDATE dragon SET nickname = $1 WHERE id = $2',
-        [nickname, dragonId],
+        'UPDATE dragon SET nickname = $1, "isPublic" = $2, "setValue" = $3, WHERE id = $4',
+        [nickname, isPublic, setValue, dragonId],
         (error, response) => {
           if(error) return reject(error);
 
