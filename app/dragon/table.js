@@ -45,19 +45,36 @@ class DragonTable {
     })
   }
   static updateDragon({ dragonId, nickname, isPublic, setValue}) {
-    return new Promise((resolve, reject) => {
-      pool.query(
-        'UPDATE dragon SET nickname = $1, "isPublic" = $2, "setValue" = $3, WHERE id = $4',
-        [nickname, isPublic, setValue, dragonId],
-        (error, response) => {
-          if(error) return reject(error);
+    const settingsMap = { nickname, isPublic, setValue };
 
-          resolve();
-        }
-      )
+    // Object.entries() returns arrays - key/value pairs like this sec.160
+    //[['nickname', nickname], ['isPublic', isPublic]]
+    const valueQueries = Object.entries(settingsMap).filter(([settingKey, settingValue]) => {
+      console.log('settingKey', settingKey, 'settingValue', settingValue)
+
+      if(settingValue !== undefined) {
+        return new Promise((resolve, reject) => {
+          pool.query(
+            // use back ticks `` for ${}
+            `UPDATE dragon SET "${settingKey}" = $1 WHERE id = $2`,
+            [settingValue, dragonId],
+            (error, response) => {
+              if (error) return reject(error);
+
+              resolve();
+            }
+          )
+        })
+      }
     })
+    return Promise.all(valueQueries);
+    
   }
 }
+
+DragonTable.updateDragon({ dragonId: 1, nickname: 'fobby'})
+.then(() => console.log('successfully updated dragon'))
+.catch(error => console.error('error', error))
 
 //// For test => in the terminal, node app/dragon/table.js
 // DragonTable.getDragon({dragonId: 13})
