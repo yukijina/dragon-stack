@@ -72,9 +72,9 @@ class DragonTable {
   }
 }
 
-DragonTable.updateDragon({ dragonId: 1, nickname: 'fobby'})
-.then(() => console.log('successfully updated dragon'))
-.catch(error => console.error('error', error))
+// DragonTable.updateDragon({ dragonId: 1, nickname: 'fobby'})
+// .then(() => console.log('successfully updated dragon'))
+// .catch(error => console.error('error', error))
 
 //// For test => in the terminal, node app/dragon/table.js
 // DragonTable.getDragon({dragonId: 13})
