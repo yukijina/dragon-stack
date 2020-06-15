@@ -64,7 +64,7 @@ class AccountTable {
         [value, accountId],
         (error, response) => {
           if (error) return reject(error);
-
+          // resolve call is empty (it is updated, nothing returns)
           resolve();
         }
       )
@@ -82,4 +82,5 @@ class AccountTable {
 // AccountTable.updateBalance({ accountId: 1, value: 100000 })
 // .then(() => console.log('update occurered'))
 // .catch(error => console.error('error', error))
+
 module.exports = AccountTable;
