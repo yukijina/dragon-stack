@@ -56,11 +56,30 @@ class AccountTable {
       )
     })
   }
+
+  static updateBalance({ accountId, value }) {
+    return new Promise((resolve, result) => {
+      pool.query(
+        'UPDATE account SET balance = balance + $1 WHERE id = $2',
+        [value, accountId],
+        (error, response) => {
+          if (error) return reject(error);
+
+          resolve();
+        }
+      )
+    })
+  }
 }
+
 
 // debugging code
 // AccountTable.getAccountDragons({ accuntId: 1})
 // .then(({ accountDragons }) => console.log('accountDragons', accountDragons))
 // .catch(error => console.error('error', error));
 
+//dubugging code
+// AccountTable.updateBalance({ accountId: 1, value: 100000 })
+// .then(() => console.log('update occurered'))
+// .catch(error => console.error('error', error))
 module.exports = AccountTable;
