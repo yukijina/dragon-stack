@@ -74,7 +74,7 @@ router.post('/buy', (req, res, next) => {
     const sellerId = accountId;
 
     return Promise.all(([
-      AccountTable.updatedBalance({
+      AccountTable.updateBalance({
         accountId: buyerId, value: -setValue
       }),
       AccountTable.updateBalance({
