@@ -10,7 +10,7 @@ class DragonTable {
         // () shema, in order to keep camel case, generationId is wrapped by "". Otherwise SQL consiner it to lowecase
         // return dragon id
         // [] all the values that you want to insert in sql
-        'INSERT INTO dragon(birthdate, nickname, "generationId", "isPublic", "setValue", "sireValue") VALUES($1, $2, $3, $4, $5. $6) RETURNING id', [birthdate, nickname, generationId, isPublic, setValue, sireValue],
+        'INSERT INTO dragon(birthdate, nickname, "generationId", "isPublic", "setValue", "sireValue") VALUES($1, $2, $3, $4, $5, $6) RETURNING id', [birthdate, nickname, generationId, isPublic, setValue, sireValue],
         (err, res) => {
           if (err) return reject(err);
 
